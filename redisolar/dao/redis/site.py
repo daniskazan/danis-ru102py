@@ -37,7 +37,7 @@ class SiteDaoRedis(SiteDaoBase, RedisDaoBase):
     def find_all(self, **kwargs) -> Set[Site]:
         """Find all Sites in Redis."""
         # START Challenge #1
-        site_ids_key = self.key_schema.site_ids_key()
+        site_ids_key = self.key_schema.site_ids_key()  # returns "sites:ids"
         site_ids = self.redis.smembers(site_ids_key)
         hash_keys = [self.key_schema.site_hash_key(site_id) for site_id in site_ids]
         site_hashes = [self.redis.hgetall(hash_key) for hash_key in hash_keys]
